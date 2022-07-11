@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@datastructures-js/linked-list": "^5.2.2"
+  }
+}
