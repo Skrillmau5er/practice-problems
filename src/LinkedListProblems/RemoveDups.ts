@@ -8,6 +8,7 @@ list.insertFirst(3)
 list.insertFirst(4)
 list.insertFirst(1)
 list.insertFirst(5)
+list.insertFirst(1)
 list.insertFirst(6)
 list.insertFirst(1)
 list.insertFirst(3)
@@ -20,9 +21,10 @@ const removeDupsWithBuffer = (list: LinkedList<number>) => {
   while (node && node.hasNext) {
     if (!!trackedVals.get(node.getValue()) && prevNode) {
       prevNode.setNext(node.getNext())
+    } else {
+      trackedVals.set(node.getValue(), node.getValue())
+      prevNode = node
     }
-    trackedVals.set(node.getValue(), node.getValue())
-    prevNode = node
     node = node.getNext()
   }
 }
@@ -36,8 +38,9 @@ const removeDupsWithOutBuffer = (list: LinkedList<number>) => {
     while (runnerNode && runnerNode.hasNext) {
       if (runnerNode.getValue() === node.getValue() && prevNode) {
         prevNode.setNext(runnerNode.getNext())
+      } else {
+        prevNode = runnerNode
       }
-      prevNode = runnerNode
       runnerNode = runnerNode.getNext()
     }
     node = node.getNext()
@@ -46,8 +49,4 @@ const removeDupsWithOutBuffer = (list: LinkedList<number>) => {
 
 console.log(`Before: ${list.toArray()}`)
 removeDupsWithOutBuffer(list)
-console.log(`After: ${list.toArray()}`)
-
-console.log(`Before: ${list.toArray()}`)
-removeDupsWithBuffer(list)
 console.log(`After: ${list.toArray()}`)
